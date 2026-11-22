@@ -1,0 +1,8 @@
+node_modules
+dist/
+.DS_Store
+.env
+
+# Private posts: only on your computer, never pushed
+src/posts/private/
+public/private/

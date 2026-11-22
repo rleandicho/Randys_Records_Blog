@@ -1,0 +1,760 @@
+/* ============================================================
+   Records: the desk (turntable + computer), the crate of
+   sleeves, and the record / sleeve / turntable pieces.
+   ============================================================ */
+
+/* ---------- The desk, seen from above ---------- */
+
+.desk {
+  margin: 0 auto;
+}
+
+.desk__top {
+  display: grid;
+  /* turntable 450 mm wide, computer side 770 mm wide: same scale */
+  grid-template-columns: minmax(0, 450fr) minmax(0, 770fr);
+  gap: clamp(1rem, 3vw, 2.6rem);
+  align-items: center;
+  padding: clamp(18px, 3.4vw, 42px) clamp(16px, 3vw, 38px);
+  border-radius: 12px;
+  /* walnut planks running left to right */
+  background:
+    repeating-linear-gradient(180deg, transparent 0 calc(25% - 2px), rgba(30, 14, 4, 0.35) calc(25% - 2px) 25%),
+    repeating-linear-gradient(179.3deg, rgba(255, 230, 200, 0.04) 0 1px, transparent 1px 7px),
+    repeating-linear-gradient(180.6deg, rgba(40, 18, 4, 0.08) 0 2px, transparent 2px 15px),
+    linear-gradient(90deg, #6f4528, #865836 35%, #7b4d2e 65%, #6a4126);
+  box-shadow:
+    inset 0 0 0 3px rgba(40, 20, 6, 0.55),
+    inset 0 2px 0 6px rgba(255, 220, 180, 0.05),
+    0 20px 34px -20px rgba(0, 0, 0, 0.65);
+}
+
+.desk__left {
+  padding: 2% 0;
+}
+
+.desk__right {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
+.desk__now {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 1.4rem;
+  margin: 1.1rem 0 0;
+  text-align: center;
+}
+
+/* ---------- The computer side ---------- */
+
+.pc {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pc .note { fill: var(--yellow); }
+.pc .note--orange { fill: var(--orange); }
+.pc .scribble { fill: none; stroke: rgba(29, 27, 24, 0.55); stroke-width: 0.55; stroke-linecap: round; }
+.pc .cable { fill: none; stroke: #121214; stroke-width: 0.9; stroke-linecap: round; }
+
+/* monitor */
+.pc .mon-base { stroke: rgba(255, 255, 255, 0.08); stroke-width: 0.3; }
+.pc .mon-neck { fill: #1d1e21; }
+.pc .mon-back { fill: #222327; }
+.pc .mon-panel { fill: #141517; stroke: rgba(255, 255, 255, 0.07); stroke-width: 0.25; }
+.pc .mon-lit { fill: #dbe8ff; opacity: 0.55; }
+.pc .mon-led { fill: #f2f2f2; opacity: 0.8; }
+
+/* keyboard */
+.pc .kb-plate { fill: #1c1d20; }
+.pc .kb-bevel { fill: none; stroke: rgba(255, 255, 255, 0.09); stroke-width: 0.3; }
+.pc .kb-glow { opacity: 0.75; }
+.pc .cap { fill: #1a1b1e; stroke: #0b0b0c; stroke-width: 0.2; }
+.pc .cap-top { fill: #26272b; }
+.pc .legend {
+  font-family: system-ui, sans-serif;
+  font-size: 1.05px;
+  font-weight: 600;
+  fill: #e9e4dc;
+  opacity: 0.85;
+}
+.pc .legend--sm { font-size: 0.72px; }
+.pc .oled { fill: #050505; stroke: #333; stroke-width: 0.2; }
+.pc .oled-text { font-family: var(--font-tape); font-size: 1.3px; fill: #f4f4f4; }
+.pc .roller { fill: #8f9196; }
+.pc .roller-knurl { stroke: #5c5e63; stroke-width: 0.15; }
+.pc .wrist { fill: #18191b; stroke: rgba(255, 255, 255, 0.06); stroke-width: 0.3; }
+
+/* wireless mouse */
+.pc .mouse { fill: #222326; }
+.pc .mouse-sheen { fill: url(#pc-mouse-hi); }
+.pc .mouse-seam { fill: none; stroke: #0b0b0c; stroke-width: 0.25; }
+.pc .mouse-wheel { fill: #3b3c41; stroke: #0b0b0c; stroke-width: 0.2; }
+.pc .mouse-wheel-grip { stroke: #26272a; stroke-width: 0.2; }
+.pc .mouse-side { stroke: #3a3b3f; stroke-width: 0.6; stroke-linecap: round; }
+.pc .mouse-led { fill: #f08a24; }
+
+/* ---------- Turntable (top-down) ---------- */
+
+.turntable {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 450 / 368; /* real size: 450 × 368 mm */
+  border-radius: 1.4cqi;
+  view-transition-name: turntable;
+  /* gloss black plinth with a soft reflection */
+  background:
+    linear-gradient(118deg, transparent 50%, rgba(255, 255, 255, 0.07) 51% 58%, transparent 59%),
+    radial-gradient(120% 90% at 30% 15%, #333337, #111113 55%, #0b0b0c);
+  box-shadow:
+    inset 0 0 0 0.35cqi #3c3c41,
+    inset 0 0.7cqi 0.9cqi rgba(255, 255, 255, 0.07),
+    0 0.9cqi 0 #050505,
+    0 2.4cqi 3.4cqi rgba(0, 0, 0, 0.5);
+}
+
+.turntable__hinge {
+  position: absolute;
+  top: -1.1cqi;
+  width: 6.4cqi;
+  height: 3.4cqi;
+  border-radius: 0.7cqi;
+  background: linear-gradient(#2b2b2f, #121214);
+  box-shadow: inset 0 0 0 0.3cqi #3b3b40;
+}
+
+.turntable__hinge--l { left: 10cqi; }
+.turntable__hinge--r { left: 70cqi; }
+
+.turntable__platter {
+  position: absolute;
+  /* 296 mm platter; 1cqi = 4.5 mm */
+  left: 7cqi;
+  top: 6cqi;
+  width: 66cqi;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* brushed aluminium rim */
+  background: conic-gradient(#f5f5f5, #9b9b9b 12%, #eeeeee 25%, #8e8e8e 38%, #f3f3f3 50%, #a0a0a0 63%, #efefef 75%, #959595 88%, #f5f5f5);
+  box-shadow: 0 0.8cqi 1.4cqi rgba(0, 0, 0, 0.6);
+}
+
+.turntable__mat {
+  position: absolute;
+  inset: 1.7cqi;
+  border-radius: 50%;
+  /* black felt */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(circle, #252525, #1b1b1b 70%, #202020 100%);
+  box-shadow: inset 0 0 1.2cqi rgba(0, 0, 0, 0.8);
+}
+
+.turntable__slot {
+  position: absolute;
+  /* a 12-inch (302 mm) record, just overhanging the platter */
+  left: 6.45cqi;
+  top: 5.45cqi;
+  width: 67.1cqi;
+  z-index: 2;
+}
+
+.turntable__spindle {
+  position: absolute;
+  left: calc(40cqi - 0.9cqi);
+  top: calc(39cqi - 0.9cqi);
+  width: 1.8cqi;
+  height: 1.8cqi;
+  border-radius: 50%;
+  z-index: 3;
+  background: radial-gradient(circle at 35% 35%, #fff, #9a9a9a 70%);
+}
+
+.turntable__arm {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  overflow: visible;
+  filter: drop-shadow(0.4cqi 0.9cqi 0.5cqi rgba(0, 0, 0, 0.6));
+}
+
+.turntable__arm .arm-rest { fill: #1f1f22; stroke: #4c4c52; stroke-width: 0.3; }
+.turntable__arm .arm-clip { fill: none; stroke: #b9b9bd; stroke-width: 0.45; }
+.turntable__arm .arm-dial { fill: #1a1a1d; stroke: #8f9095; stroke-width: 0.4; }
+.turntable__arm .arm-dial-tick { stroke: #e8e8e8; stroke-width: 0.35; }
+.turntable__arm .arm-cue-base { fill: #1c1c1f; stroke: #4a4a50; stroke-width: 0.3; }
+.turntable__arm .arm-cue { stroke: #d3d3d6; stroke-width: 0.8; stroke-linecap: round; }
+.turntable__arm .arm-base { stroke: #4f4f55; stroke-width: 0.35; }
+.turntable__arm .arm-ring { fill: none; stroke: #a7a8ac; stroke-width: 0.35; }
+.turntable__arm .arm-knurl { stroke: rgba(0, 0, 0, 0.55); stroke-width: 0.25; }
+.turntable__arm .arm-scale { fill: #c9c9cc; }
+.turntable__arm .arm-stub { fill: #b9babd; }
+.turntable__arm .arm-gimbal { fill: #242427; stroke: #9a9ba0; stroke-width: 0.3; }
+.turntable__arm .arm-collar { fill: #19191b; }
+.turntable__arm .arm-head { fill: #d4d5d8; stroke: #85868a; stroke-width: 0.25; }
+.turntable__arm .arm-lift { fill: none; stroke: #d4d5d8; stroke-width: 0.55; stroke-linecap: round; }
+.turntable__arm .arm-cart { fill: #141416; }
+.turntable__arm .arm-screw { fill: #e8e8e8; }
+.turntable__arm .arm-stylus { fill: #d9402b; }
+.turntable__arm .arm-pivot { fill: #dcdcdf; stroke: #6d6e72; stroke-width: 0.3; }
+
+.turntable__arm .arm {
+  transform-box: view-box;
+  transform-origin: 86px 18px;
+  transition: transform 0.9s cubic-bezier(0.45, 0.1, 0.3, 1);
+}
+
+/* playing: the arm swings over and sets down on the lead-in groove */
+.turntable.is-playing .turntable__arm .arm {
+  transform: rotate(27deg);
+  transition-delay: 0.25s;
+}
+
+.turntable__keys {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 10cqi;
+}
+
+.tt-key {
+  position: absolute;
+  bottom: 1.3cqi;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7cqi;
+  width: 9cqi;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+}
+
+.tt-key:nth-child(1) { left: 8cqi; }
+.tt-key:nth-child(2) { left: 18cqi; }
+.tt-key:nth-child(3) { left: 48cqi; }
+.tt-key:nth-child(4) { left: 58cqi; }
+
+.tt-key i {
+  width: 4.4cqi;
+  height: 4.4cqi;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 1.3cqi, rgba(0, 0, 0, 0.12) 1.4cqi 1.5cqi, transparent 1.6cqi),
+    repeating-conic-gradient(from 10deg, rgba(255, 255, 255, 0.18) 0 4deg, transparent 4deg 9deg),
+    radial-gradient(circle at 40% 35%, #f6f6f6, #a9aaad 75%);
+  box-shadow: 0 0 0 0.35cqi #050505, 0 0 0 0.5cqi #3a3a3e, 0 0.4cqi 0.4cqi rgba(0, 0, 0, 0.6);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.tt-key small {
+  font-family: var(--font-mono);
+  font-size: 1.35cqi;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #b7b7b7;
+}
+
+.tt-key--play {
+  cursor: pointer;
+}
+
+.tt-key--play:hover:not(:disabled) i {
+  background: linear-gradient(#ffffff, #b9b9b9);
+}
+
+.tt-key--play:active:not(:disabled) i,
+.turntable.is-playing .tt-key--play i {
+  transform: scale(0.93);
+  filter: brightness(0.92);
+}
+
+.tt-key--play:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.turntable__led {
+  position: absolute;
+  left: 66cqi;
+  bottom: 4.4cqi;
+  width: 1.3cqi;
+  height: 1.3cqi;
+  border-radius: 50%;
+  background: #3d1410;
+}
+
+.turntable__led.on {
+  background: #ff5a3c;
+  box-shadow: 0 0 1.4cqi #ff5a3c;
+}
+
+.turntable__print {
+  position: absolute;
+  right: 3.5cqi;
+  bottom: 2.2cqi;
+  font-family: var(--font-mono);
+  font-size: 1.5cqi;
+  font-style: italic;
+  color: #8f8f94;
+}
+
+/* ---------- Vinyl ---------- */
+
+.vinyl {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.vinyl__disc {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    /* gaps between tracks */
+    radial-gradient(circle, transparent 0 36%, rgba(255, 255, 255, 0.07) 36.4% 36.9%, transparent 37.3% 52%, rgba(255, 255, 255, 0.06) 52.4% 52.9%, transparent 53.3% 68%, rgba(255, 255, 255, 0.05) 68.4% 68.9%, transparent 69.3%),
+    /* grooves */
+    repeating-radial-gradient(circle, #151515 0, #1e1e1e 0.7cqi, #151515 1.4cqi),
+    #131313;
+  box-shadow: inset 0 0 0 0.7cqi #0a0a0a, 0 0.6cqi 1.2cqi rgba(0, 0, 0, 0.45);
+}
+
+.vinyl__disc.is-spinning {
+  animation: spin 1.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* the center sticker: the album art, printed round */
+.vinyl__label {
+  position: absolute;
+  left: 32%;
+  top: 32%;
+  width: 36%;
+  height: 36%;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--b1, #d9402b);
+  box-shadow: inset 0 0 0 0.25cqi rgba(0, 0, 0, 0.35);
+}
+
+.vinyl__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.vinyl__strip {
+  position: absolute;
+  left: 50%;
+  bottom: 12%;
+  transform: translateX(-50%);
+  padding: 0.3cqi 1.2cqi;
+  background: #fbf6ea;
+  color: #1d1b18;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.6cqi;
+  white-space: nowrap;
+  border-radius: 0.4cqi;
+}
+
+.vinyl__hole {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2.2cqi;
+  height: 2.2cqi;
+  margin: -1.1cqi 0 0 -1.1cqi;
+  border-radius: 50%;
+  background: #1a1714;
+}
+
+.vinyl__sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  background: conic-gradient(from 25deg, transparent 0 25deg, rgba(255, 255, 255, 0.13) 42deg, transparent 60deg 205deg, rgba(255, 255, 255, 0.09) 222deg, transparent 240deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 18cqi, #000 18.5cqi);
+  mask: radial-gradient(circle, transparent 0 18cqi, #000 18.5cqi);
+}
+
+/* the clone that flies from the crate to the platter */
+.vinyl--flying {
+  position: fixed;
+  z-index: 60;
+  margin: 0;
+  pointer-events: none;
+  transform-origin: center;
+}
+
+/* ---------- Sleeve ---------- */
+
+.sleeve {
+  container-type: inline-size;
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 1cqi;
+  background: var(--sleeve);
+  box-shadow: inset 0 0 0 0.5cqi rgba(0, 0, 0, 0.18), 0 1.4cqi 2.4cqi rgba(40, 20, 0, 0.35);
+}
+
+.sleeve__art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.sleeve__sticker {
+  position: absolute;
+  left: 7cqi;
+  top: 7cqi;
+  max-width: 64cqi;
+  padding: 3.2cqi 4cqi 3.6cqi;
+  display: grid;
+  gap: 1.6cqi;
+  background: #fbf6ea;
+  color: #1d1b18;
+  box-shadow: 0.8cqi 0.8cqi 0 rgba(0, 0, 0, 0.22);
+}
+
+.sleeve__cat {
+  display: flex;
+  justify-content: space-between;
+  gap: 3cqi;
+  font-family: var(--font-badge);
+  font-size: 4.4cqi;
+  color: var(--red);
+}
+
+.sleeve__year {
+  color: #5a5247;
+}
+
+.sleeve__title {
+  font-family: var(--font-tape);
+  font-size: clamp(5cqi, calc(140cqi / var(--len, 20)), 7.6cqi);
+  line-height: 1.15;
+}
+
+/* ring wear and a bit of cardboard texture */
+.sleeve__wear {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 50%, transparent 0 44cqi, rgba(255, 255, 255, 0.09) 44.5cqi 45.5cqi, transparent 46cqi),
+    radial-gradient(rgba(0, 0, 0, 0.06) 0.3cqi, transparent 0.4cqi) 0 0 / 2cqi 2cqi,
+    linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 40%);
+}
+
+/* ---------- The wall of records ----------
+   Sleeves stand face-out on stained wood picture ledges, three to a shelf
+   (two on phones), each with a small label card under the ledge. */
+
+/* A full-width walnut slat wall: rounded slats over black acoustic felt,
+   each slat a slightly different tone with its own grain, a soft wash of
+   light from three ceiling spots, and a warm LED strip under every shelf. */
+.wall {
+  --slat: 30px; /* slat face */
+  --felt: 9px; /* gap showing the felt behind */
+  position: relative;
+  isolation: isolate;
+  width: 100vw;
+  margin: 2.8rem 0 -5rem calc(50% - 50vw); /* runs down into the footer (store padding + footer margin) */
+  padding: clamp(44px, 7vw, 84px) 16px clamp(24px, 4vw, 48px);
+  overflow: hidden;
+  background:
+    /* light from three ceiling spots, fading down the wall */
+    radial-gradient(60% 46% at 18% -6%, rgba(255, 196, 120, 0.26), transparent 70%),
+    radial-gradient(60% 46% at 50% -8%, rgba(255, 196, 120, 0.3), transparent 70%),
+    radial-gradient(60% 46% at 82% -6%, rgba(255, 196, 120, 0.26), transparent 70%),
+    /* darker toward the floor and the corners */
+    linear-gradient(180deg, transparent 55%, rgba(10, 5, 2, 0.45)),
+    linear-gradient(90deg, rgba(10, 5, 2, 0.4), transparent 14%, transparent 86%, rgba(10, 5, 2, 0.4)),
+    /* each slat a slightly different tone (7-slat repeat) */
+    repeating-linear-gradient(90deg,
+      rgba(0, 0, 0, 0) 0 calc(var(--slat) + var(--felt)),
+      rgba(0, 0, 0, 0.1) 0 calc(2 * (var(--slat) + var(--felt))),
+      rgba(255, 220, 170, 0.05) 0 calc(3 * (var(--slat) + var(--felt))),
+      rgba(0, 0, 0, 0.16) 0 calc(4 * (var(--slat) + var(--felt))),
+      rgba(0, 0, 0, 0.04) 0 calc(5 * (var(--slat) + var(--felt))),
+      rgba(255, 220, 170, 0.08) 0 calc(6 * (var(--slat) + var(--felt))),
+      rgba(0, 0, 0, 0.08) 0 calc(7 * (var(--slat) + var(--felt)))),
+    /* grain running along the slats */
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9 0.012' numOctaves='3' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.12 0 0 0 0 0.06 0 0 0 0 0.02 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    /* the slats: felt gap, a lit left edge, the face, a shaded right edge */
+    repeating-linear-gradient(90deg,
+      #110d0a 0 var(--felt),
+      #4a2c17 var(--felt) calc(var(--felt) + 1px),
+      #9a6a40 calc(var(--felt) + 1px) calc(var(--felt) + 3px),
+      #7d5230 calc(var(--felt) + 5px) calc(var(--felt) + var(--slat) - 6px),
+      #5c3a20 calc(var(--felt) + var(--slat) - 3px),
+      #2a180c calc(var(--felt) + var(--slat)));
+  box-shadow:
+    inset 0 14px 18px -10px rgba(0, 0, 0, 0.55),
+    inset 0 -14px 18px -10px rgba(0, 0, 0, 0.55);
+}
+
+.wall__empty {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: #f4e6cf;
+}
+
+.wall__shelf {
+  --gap: clamp(16px, 3vw, 36px);
+  --lip: 9px; /* how much of the sleeve sits down behind the ledge's front lip */
+  --ledge-top: calc((100cqw - (var(--cols, 3) - 1) * var(--gap)) / var(--cols, 3) * 1.28 - var(--lip));
+  container-type: inline-size;
+  position: relative;
+  max-width: 880px;
+  list-style: none;
+  margin: 0 auto clamp(2.6rem, 5vw, 3.6rem);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  column-gap: var(--gap);
+  align-items: start;
+}
+
+/* the ledge: a floating oak shelf, lit top edge, LED strip tucked underneath */
+.wall__shelf::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  left: calc(var(--gap) * -0.8);
+  right: calc(var(--gap) * -0.8);
+  top: var(--ledge-top);
+  height: 22px;
+  border-radius: 2px;
+  pointer-events: none;
+  background:
+    /* top board, front lip, and the LED strip along the bottom edge */
+    linear-gradient(180deg, #d9b582 0 5px, #6b4a2a 5px 6px, transparent 6px calc(100% - 3px), #fff2d6 calc(100% - 3px) calc(100% - 1px), #ffd59a calc(100% - 1px)),
+    repeating-linear-gradient(180deg, rgba(90, 55, 20, 0.09) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg, #b98c57, #a47746 60%, #8f6538);
+  box-shadow:
+    inset 3px 0 0 rgba(0, 0, 0, 0.18),
+    inset -3px 0 0 rgba(0, 0, 0, 0.18),
+    0 2px 10px 1px rgba(255, 196, 120, 0.41);
+}
+
+/* the LED's light washing down the slats below the shelf */
+.wall__shelf::after {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  left: calc(var(--gap) * -1.4);
+  right: calc(var(--gap) * -1.4);
+  top: calc(var(--ledge-top) + 20px);
+  height: min(70cqw, 380px);
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 226, 170, 0.55), rgba(255, 200, 130, 0.22) 14%, transparent 32%),
+    radial-gradient(75% 85% at 50% 0%, rgba(255, 196, 120, 0.7), rgba(255, 165, 85, 0.28) 45%, transparent 78%);
+  -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mix-blend-mode: screen;
+  opacity: var(--shelf-light, 0.75); /* 1 = full brightness */
+}
+
+.rec {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.rec__stage {
+  position: relative;
+  display: block;
+  aspect-ratio: 1 / 1.28;
+  text-decoration: none;
+  color: inherit;
+}
+
+.rec__stage:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 4px;
+}
+
+/* the sleeve and its record, leaning back against the wall */
+.rec__lean {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 0;
+  aspect-ratio: 1;
+  transform-origin: 50% 100%;
+  transform: perspective(900px) rotateX(5deg);
+  transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.4, 1);
+}
+
+.rec__sleeve {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12), 6px 10px 14px -4px rgba(40, 25, 10, 0.5);
+}
+
+.rec__vinyl {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 4%;
+  z-index: 0;
+  transform: translateY(0) rotate(0deg);
+  transition: transform 0.35s cubic-bezier(0.5, 0, 0.3, 1);
+}
+
+/* museum wall label under the ledge */
+.rec__card {
+  width: 96%;
+  margin: calc(24px - var(--lip, 9px) + 16px) auto 0;
+  padding: 0.95rem 1.05rem 1.1rem;
+  background: #fbfaf6;
+  color: #151515;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: left;
+  border-radius: 1px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.18), 0 8px 12px -8px rgba(40, 25, 10, 0.45);
+}
+
+.rec__card p {
+  margin: 0;
+  line-height: 1.25;
+}
+
+.rec__name {
+  font-size: 0.98rem;
+}
+
+.rec__name i {
+  font-weight: 700;
+}
+
+.rec__medium {
+  margin-top: 0.35rem !important;
+  font-size: 0.82rem;
+}
+
+.rec__credit {
+  margin-top: 0.7rem !important;
+  font-size: 0.74rem;
+  line-height: 1.4 !important;
+}
+
+.rec__credit + .rec__credit {
+  margin-top: 0.1rem !important;
+}
+
+/* Open: hover on mouse devices, tap on touch, or keyboard focus.
+   The sleeve straightens up, the record slides out until half its sticker shows,
+   and it keeps spinning for as long as the sleeve or record is hovered.
+   Only the sleeve and the record react, not the empty wall above them. */
+.rec__stage {
+  pointer-events: none;
+}
+
+.rec__lean {
+  pointer-events: auto;
+}
+
+.rec.is-open .rec__lean,
+.rec:focus-within .rec__lean {
+  transform: perspective(900px) rotateX(0deg);
+}
+
+.rec.is-open .rec__vinyl,
+.rec:focus-within .rec__vinyl {
+  transform: translateY(-54%);
+  transition: transform 0.55s 0.05s cubic-bezier(0.25, 0.8, 0.3, 1);
+}
+
+.rec.is-open .vinyl__disc,
+.rec:focus-within .vinyl__disc {
+  animation: spin 1.8s linear infinite;
+}
+
+@media (hover: hover) {
+  .rec__stage:hover .rec__lean {
+    transform: perspective(900px) rotateX(0deg);
+  }
+
+  .rec__stage:hover .rec__vinyl {
+    transform: translateY(-54%);
+    transition: transform 0.55s 0.05s cubic-bezier(0.25, 0.8, 0.3, 1);
+  }
+
+  .rec__stage:hover .vinyl__disc {
+    animation: spin 1.8s linear infinite;
+  }
+}
+
+/* While its record is flying to the turntable, the sleeve is empty. */
+.rec.is-lifting .rec__vinyl {
+  visibility: hidden;
+}
+
+/* ---------- Post page bits ---------- */
+
+.more-records__sleeve {
+  flex: 0 0 92px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 760px) {
+  .desk__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .desk__left {
+    width: min(460px, 100%);
+    margin: 0 auto;
+  }
+
+  /* phones: just the turntable on the desk */
+  .desk__right {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .rec__card {
+    width: 100%;
+    padding: 0.7rem 0.7rem 0.8rem;
+  }
+
+  .rec__name {
+    font-size: 0.85rem;
+  }
+
+  .rec__medium {
+    font-size: 0.75rem;
+  }
+
+  .rec__credit {
+    font-size: 0.68rem;
+  }
+}
